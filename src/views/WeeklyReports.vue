@@ -58,39 +58,39 @@
 </template>
 
 <script setup>
-import Sidebar from '@/components/NavBar/SideBar.vue';
-import TopBar from '@/components/NavBar/TopBar.vue';
-import FooterSection from '@/components/FooterSection.vue';
-import { useUserStore } from '@/stores/userStore';
+import Sidebar from '@/components/NavBar/SideBar.vue'
+import TopBar from '@/components/NavBar/TopBar.vue'
+import FooterSection from '@/components/FooterSection.vue'
+import { useUserStore } from '@/stores/userStore'
 // import { useRouter } from 'vue-router';
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const userStore = useUserStore();
+const userStore = useUserStore()
 const users = computed(() => {
-  return userStore.getAllUsers.map(user => {
-    let presentDays = 0;
-    let absentDays = 0;
+  return userStore.getAllUsers.map((user) => {
+    let presentDays = 0
+    let absentDays = 0
     if (user.attendance) {
-      Object.values(user.attendance).forEach(status => {
-        if (status) presentDays += 1;
-        else absentDays += 1;
-      });
+      Object.values(user.attendance).forEach((status) => {
+        if (status) presentDays += 1
+        else absentDays += 1
+      })
     }
     return {
       ...user,
       presentDays,
-      absentDays,
-    };
-  });
-});
+      absentDays
+    }
+  })
+})
 
 const totalPresentDays = computed(() => {
-  return users.value.reduce((acc, user) => acc + user.presentDays, 0);
-});
+  return users.value.reduce((acc, user) => acc + user.presentDays, 0)
+})
 
 const totalAbsentDays = computed(() => {
-  return users.value.reduce((acc, user) => acc + user.absentDays, 0);
-});
+  return users.value.reduce((acc, user) => acc + user.absentDays, 0)
+})
 </script>
 
 <style scoped>

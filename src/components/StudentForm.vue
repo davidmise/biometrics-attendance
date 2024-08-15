@@ -1,17 +1,33 @@
 <template>
   <div class="container mt-4">
     <h1>guests Data</h1>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addguestModal">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#addguestModal"
+    >
       Add/Update guest
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="addguestModal" tabindex="-1" aria-labelledby="addguestModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="addguestModal"
+      tabindex="-1"
+      aria-labelledby="addguestModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="addguestModalLabel">Add/Update guest</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form @submit.prevent="addguest">
@@ -24,12 +40,22 @@
                 </select>
               </div>
               <div class="mb-3">
-                <input type="text" v-model="newguestName" class="form-control" placeholder="Enter guest name"
-                  required />
+                <input
+                  type="text"
+                  v-model="newguestName"
+                  class="form-control"
+                  placeholder="Enter guest name"
+                  required
+                />
               </div>
               <div class="mb-3">
-                <input type="text" v-model="newguestClass" class="form-control" placeholder="Enter guest Class"
-                  required />
+                <input
+                  type="text"
+                  v-model="newguestClass"
+                  class="form-control"
+                  placeholder="Enter guest Class"
+                  required
+                />
               </div>
               <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
             </form>

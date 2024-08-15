@@ -98,7 +98,11 @@
                   <div v-if="currentUser" class="mb-4">
                     <h3>Current User Details</h3>
                     <p>Fingerprint ID: {{ currentUser.fingerprint_id }}</p>
-                    <p>Date of Birth: {{ currentUser.dob_day }}-{{ currentUser.dob_month }}-{{ currentUser.dob_year }}</p>
+                    <p>
+                      Date of Birth: {{ currentUser.dob_day }}-{{ currentUser.dob_month }}-{{
+                        currentUser.dob_year
+                      }}
+                    </p>
                     <p>Unique ID: {{ currentUser.unique_id }}</p>
                   </div>
 
@@ -121,8 +125,15 @@
                         <td>{{ user.dob_day }}-{{ user.dob_month }}-{{ user.dob_year }}</td>
                         <td>{{ user.unique_id }}</td>
                         <td>
-                          <button class="btn btn-outline-primary btn-sm" @click="editUser(user)">Edit</button>
-                          <button class="btn btn-outline-danger btn-sm" @click="deleteUser(user.id)">Delete</button>
+                          <button class="btn btn-outline-primary btn-sm" @click="editUser(user)">
+                            Edit
+                          </button>
+                          <button
+                            class="btn btn-outline-danger btn-sm"
+                            @click="deleteUser(user.id)"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -162,7 +173,7 @@ const form = ref({
 
 // Handle fingerprint scan (blur event)
 const handleScan = () => {
-  const fingerprintId = form.value.fingerprint_id;
+  const fingerprintId = form.value.fingerprint_id
   if (fingerprintId) {
     userStore.fetchUserByFingerprintId(fingerprintId)
   }
@@ -177,15 +188,15 @@ const handleSubmit = () => {
     dob_month: form.value.dob_month,
     dob_year: form.value.dob_year,
     unique_id: generateUniqueId() // Generate unique_id
-  };
-
-  if (userStore.currentUser) {
-    userStore.updateUser(userData);
-  } else {
-    userStore.addUser(userData);
   }
 
-  resetForm();
+  if (userStore.currentUser) {
+    userStore.updateUser(userData)
+  } else {
+    userStore.addUser(userData)
+  }
+
+  resetForm()
 }
 
 // Reset form
@@ -202,26 +213,26 @@ const resetForm = () => {
 
 // Function to pad number with leading zeros
 const padNumber = (num, size) => {
-  let s = num + "";
-  while (s.length < size) s = "0" + s;
-  return s;
+  let s = num + ''
+  while (s.length < size) s = '0' + s
+  return s
 }
 
 // Computed property to generate unique_id
 const generateUniqueId = () => {
   if (form.value.dob_day && form.value.dob_month && form.value.dob_year) {
-    const dob = `${form.value.dob_day}${form.value.dob_month}${form.value.dob_year}`;
-    const counter = userStore.getAllUsers.length + 1; // Replace with your own logic to maintain uniqueness
-    const paddedCounter = padNumber(counter, 10); // Ensure counter is 10 digits
-    return `${dob}${paddedCounter}`;
+    const dob = `${form.value.dob_day}${form.value.dob_month}${form.value.dob_year}`
+    const counter = userStore.getAllUsers.length + 1 // Replace with your own logic to maintain uniqueness
+    const paddedCounter = padNumber(counter, 10) // Ensure counter is 10 digits
+    return `${dob}${paddedCounter}`
   }
-  return '';
+  return ''
 }
 
 // Fetch users data when the component is mounted
 onMounted(() => {
-  userStore.fetchUsers();
-});
+  userStore.fetchUsers()
+})
 
 // Display current user details if available
 const currentUser = computed(() => userStore.getCurrentUser)
@@ -238,7 +249,6 @@ const editUser = (user) => {
 const deleteUser = (userId) => {
   userStore.deleteUser(userId)
 }
-
 </script>
 
 <style scoped>

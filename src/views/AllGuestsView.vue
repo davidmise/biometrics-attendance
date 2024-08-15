@@ -31,10 +31,19 @@
                         <td>{{ user.dob_day }}-{{ user.dob_month }}-{{ user.dob_year }}</td>
                         <td>{{ user.unique_id }}</td>
                         <td>
-                          <span :class="statusBadgeClass(user.attendance)">{{ statusText(user.attendance) }}</span>
+                          <span :class="statusBadgeClass(user.attendance)">{{
+                            statusText(user.attendance)
+                          }}</span>
                         </td>
                         <td>
-                          <button class="btn btn-sm" :class="{'btn-success': user.attendance, 'btn-danger': !user.attendance}" @click="toggleAttendance(user)">
+                          <button
+                            class="btn btn-sm"
+                            :class="{
+                              'btn-success': user.attendance,
+                              'btn-danger': !user.attendance
+                            }"
+                            @click="toggleAttendance(user)"
+                          >
                             {{ user.attendance ? 'Mark Absent' : 'Mark Present' }}
                           </button>
                         </td>
@@ -42,9 +51,7 @@
                     </tbody>
                   </table>
                 </div>
-                <div v-else>
-                  Loading users...
-                </div>
+                <div v-else>Loading users...</div>
               </div>
             </div>
           </div>
@@ -62,27 +69,27 @@ import TopBar from '@/components/NavBar/TopBar.vue'
 import FooterSection from '@/components/FooterSection.vue'
 import { useUserStore } from '@/stores/userStore'
 
-const $store = useUserStore();
-const users = $store.users; // Ensure users are properly retrieved from store
+const $store = useUserStore()
+const users = $store.users // Ensure users are properly retrieved from store
 
 // Function to toggle attendance status
 const toggleAttendance = (user) => {
-  user.attendance = !user.attendance;
-  $store.updateUser(user); // Update user in store and database
-};
+  user.attendance = !user.attendance
+  $store.updateUser(user) // Update user in store and database
+}
 
 // Function to determine the CSS class for status badges based on attendance status
 const statusBadgeClass = (status) => {
   return {
     'badge bg-success': status === true,
-    'badge bg-danger': status === false,
-  };
-};
+    'badge bg-danger': status === false
+  }
+}
 
 // Function to convert status value to text
 const statusText = (status) => {
-  return status ? 'Present' : 'Absent';
-};
+  return status ? 'Present' : 'Absent'
+}
 </script>
 
 <style>

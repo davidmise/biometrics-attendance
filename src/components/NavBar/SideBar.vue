@@ -45,7 +45,6 @@
           </router-link>
         </li>
 
-     
         <li class="sidebar-header">REPORT</li>
 
         <li class="sidebar-item">
